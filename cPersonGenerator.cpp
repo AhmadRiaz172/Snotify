@@ -8,15 +8,15 @@
 #include <sstream>		// String Stream
 #include <string>
 
-bool cPersonGenerator::LoadCensusFiles(
-	std::string babyNameFile,
-	std::string surnameFile,
-	std::string streetNameFile,
-	std::string& errorString)
-{
-	// TODO: Put YOUR amazing code here!
-	return true;
-}
+//bool cPersonGenerator::LoadCensusFiles(
+//	std::string babyNameFile,
+//	std::string surnameFile,
+//	std::string streetNameFile,
+//	std::string& errorString)
+//{
+//	// TODO: Put YOUR amazing code here!
+//	return true;
+//}
 
 
 

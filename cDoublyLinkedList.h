@@ -9,11 +9,12 @@ class DoublyLinkedList {
 		Node* next;
 		Node* prev;
 	};
+
+public:
+
 	Node* head;
 	Node* current;
 	Node* tail;
-
-public:
 
 	DoublyLinkedList() {
 		head = NULL;
@@ -60,13 +61,27 @@ public:
 	}
 
 	void deleteAtCurrent() {
-		Node* temp = current;
-		(current->prev)->next = current->next;
-		(current->next)->prev = current->prev;
-		temp = temp->next;
-		delete current;
-		current = temp;
+		/* base case */
+		if (head == NULL || current == NULL)
+			return;
 
+		/* If node to be deleted is head node */
+		if (head == current)
+			head = current->next;
+
+		/* Change next only if node to be
+		deleted is NOT the last node */
+		if (current->next != NULL)
+			current->next->prev = current->prev;
+
+		/* Change prev only if node to be
+		deleted is NOT the first node */
+		if (current->prev != NULL)
+			current->prev->next = current->next;
+
+		/* Finally, free the memory occupied by current*/
+		free(current);
+		return;
 	}
 
 	Node* getCurrent() {
@@ -81,26 +96,22 @@ public:
 		}
 	}
 	void insertLast(T dataItem) {
+		Node* newNode = new Node;
+		newNode->next = NULL;
+		newNode->prev = NULL;
+		newNode->data = dataItem;
 		if (head == NULL) {
-			Node* newNode = new Node;
-			newNode->next = NULL;
-			newNode->data = dataItem;
 			head = newNode;
-			tail = newNode;
 			current = head;
+			return;
 		}
-		else {
-			Node* newNode = new Node;
-			Node* temp = head;
-			while (temp->next != NULL) {
-				temp = temp->next;
-			}
-			newNode->prev = temp;
-			newNode->next = NULL;
-			temp->next = newNode;
-			newNode->data = dataItem;
-			tail = newNode;
-		}
+		current = head;
+		while (current->next != NULL)
+			current = current->next;
+		current->next = newNode;
+		newNode->prev = current;
+		return;
+
 	}
 	void moveToLast() {
 		Node* temp = head;

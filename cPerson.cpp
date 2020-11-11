@@ -51,3 +51,48 @@ std::string cPerson::getGenderAsString(void)
 //	return "RATHER_NOT_SAY_UNKNOWN";
 	return "OMG! CALL THE DEV TEAM!! SOMEONE SCREWED UP!!!";
 }
+
+unsigned int  cPerson::getSnotifyUniqueUserID(void) {
+	return m_Snotify_UniqueUserID;
+}
+
+bool  cPerson :: AddSongToLibrary(cSong* sonng) {
+
+	int s = musicLibrary.getSize();
+	for (int i = 0; i < s; i++) {
+		if (musicLibrary[i].song == sonng)
+			return 0;
+	}
+
+	libraryNode newNode; 
+	newNode.song = sonng;
+	newNode.numberOfTimesPlayedByUser = 0;
+	musicLibrary.Push(newNode);
+	return 1;
+}
+
+
+void  cPerson::displaySongLibrary() {
+	for (int i = 0; i < musicLibrary.getSize(); i++) {
+		cout << musicLibrary[i].song->name << "\t" << musicLibrary[i].song->artist << "\t"
+			<< musicLibrary[i].numberOfTimesPlayedByUser << endl;
+	}
+}
+
+
+bool cPerson :: deleteSongFromLibrary(unsigned int SnotifySongID) {
+
+
+	int i;
+	int n = musicLibrary.getSize();
+	for (i = 0; i < n; i++)
+		if (musicLibrary[i].song->getUniqueID() == SnotifySongID)
+			break;
+	if (i != n) {
+		musicLibrary.deleteAt(i);
+		return 1;
+	}
+	
+	
+	return 0;
+}

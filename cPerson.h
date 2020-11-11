@@ -4,8 +4,19 @@
 
 // Warning C26812 : Prefer 'enum class' over 'enum' (Enum.3)
 #pragma warning( disable : 26812 )
-
+#include "cSong.h"
 #include <string>
+#include "cSmartArray.h"
+
+class libraryNode {
+public:
+	cSong* song;
+	unsigned int numberOfTimesPlayedByUser;
+	libraryNode() :song(NULL), numberOfTimesPlayedByUser(0) {}
+};
+
+
+
 
 class cPerson
 {
@@ -52,6 +63,12 @@ public:
 	std::string city;
 	std::string province;
 	char postalCode[6];		// Canadian postal codes are 6 characters
+
+	cSmartArray <libraryNode> musicLibrary;
+	bool AddSongToLibrary(cSong* sonng);
+	bool deleteSongFromLibrary(unsigned int SnotifySongID);
+	void displaySongLibrary();
+
 
 	unsigned int SIN;	// = 0
 	//unsigned int SIN = 0;		// C++ 11
