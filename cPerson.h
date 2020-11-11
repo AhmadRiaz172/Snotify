@@ -12,7 +12,14 @@ class libraryNode {
 public:
 	cSong* song;
 	unsigned int numberOfTimesPlayedByUser;
-	libraryNode() :song(NULL), numberOfTimesPlayedByUser(0) {}
+	libraryNode() {
+		song = NULL;
+		numberOfTimesPlayedByUser = 0; 
+	}
+	void incremet() {
+		numberOfTimesPlayedByUser ++ ;
+	}
+
 };
 
 
@@ -68,7 +75,8 @@ public:
 	bool AddSongToLibrary(cSong* sonng);
 	bool deleteSongFromLibrary(unsigned int SnotifySongID);
 	void displaySongLibrary();
-
+	cSong* playSong(unsigned int SnotifySongID);
+	cSong* findSong(unsigned int SnotifySongID);
 
 	unsigned int SIN;	// = 0
 	//unsigned int SIN = 0;		// C++ 11

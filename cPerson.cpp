@@ -74,7 +74,8 @@ bool  cPerson :: AddSongToLibrary(cSong* sonng) {
 
 void  cPerson::displaySongLibrary() {
 	for (int i = 0; i < musicLibrary.getSize(); i++) {
-		cout << musicLibrary[i].song->name << "\t" << musicLibrary[i].song->artist << "\t"
+		cout << musicLibrary[i].song->uniqueID <<"\t" <<musicLibrary[i].song->name << "\t" << musicLibrary[i].song->artist << "\t" << musicLibrary[i].song->numberOfTimesPlayed << "\t"
+			<< musicLibrary[i].song->rating << "\t"
 			<< musicLibrary[i].numberOfTimesPlayedByUser << endl;
 	}
 }
@@ -95,4 +96,25 @@ bool cPerson :: deleteSongFromLibrary(unsigned int SnotifySongID) {
 	
 	
 	return 0;
+}
+cSong *  cPerson::playSong(unsigned int SnotifySongID) {
+	for (int i = 0; i < musicLibrary.getSize(); i++) {
+		if (musicLibrary[i].song->getUniqueID() == SnotifySongID) {
+			musicLibrary[i].song->numberOfTimesPlayed++;
+			musicLibrary[i].incremet();
+			return musicLibrary[i].song;
+		}
+	}
+
+	return NULL;
+}
+
+
+cSong* cPerson:: findSong(unsigned int SnotifySongID) {
+
+	for (int i = 0; i < musicLibrary.getSize(); i++) {
+		if (musicLibrary[i].song->getUniqueID() == SnotifySongID)
+			return musicLibrary[i].song;
+	}
+	return NULL;
 }
